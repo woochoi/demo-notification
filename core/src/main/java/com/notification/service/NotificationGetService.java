@@ -1,0 +1,43 @@
+package com.notification.service;
+
+import com.notification.domain.Notification;
+import com.notification.repository.NotificationRepository;
+import com.notification.domain.NotificationType;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+@Component
+@Slf4j
+public class NotificationGetService {
+
+    private final NotificationRepository repository;
+
+    public NotificationGetService(NotificationRepository repository) {
+        this.repository = repository;
+    }
+
+    public Optional<Notification> getNotificationByTypeAndCommentId(NotificationType type, long commentId) {
+        return repository.findByTypeAndCommentId(type, commentId);
+    }
+
+    public Optional<Notification> getNotificationByTypeAndPostId(NotificationType type, long postId) {
+        return repository.findByTypeAndPostId(type, postId);
+    }
+
+    public Optional<Notification> getNotificationByTypeAndUserIdAndFollowerId(NotificationType type, long userId, long followerId) {
+        return repository.findByTypeAndUserIdAndFollowerId(type, userId, followerId);
+    }
+
+    public LocalDateTime getLatestUpdatedAt(long userId) {
+        Optional<Notification> notification = repository.findFirstByUserIdOrderByLastUpdatedAtDesc(userId);
+
+        if (notification.isEmpty()) {
+            return null;
+        }
+
+        return notification.get().getLastUpdatedAt();
+    }
+}
