@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Comment {
     private long id;
-    private long userId;
-    private String content;
+    private long userId;    // 댓글 작성자
+    private String content; // 댓글 내용
     private LocalDateTime createdAt;
 }

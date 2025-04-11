@@ -9,11 +9,13 @@ import java.util.List;
 @Getter
 @TypeAlias("LikeNotification")
 public class LikeNotification extends Notification {
-    private final long postId;
-    private final List<Long> likerIds;
+    private final long postId; // 게시글
+    private final List<Long> likerIds; // 종아요를 누른 사용자 아이디들...
 
-    public LikeNotification(String id, long userId, NotificationType type, LocalDateTime occurredAt, LocalDateTime createdAt,
-                            LocalDateTime lastUpdatedAt, LocalDateTime deletedAt, long postId, List<Long> likerIds) {
+    public LikeNotification(String id, long userId, NotificationType type,
+                            LocalDateTime occurredAt, LocalDateTime createdAt,
+                            LocalDateTime lastUpdatedAt, LocalDateTime deletedAt,
+                            long postId, List<Long> likerIds) {
         super(id, userId, type, occurredAt, createdAt, lastUpdatedAt, deletedAt);
         this.postId = postId;
         this.likerIds = likerIds;

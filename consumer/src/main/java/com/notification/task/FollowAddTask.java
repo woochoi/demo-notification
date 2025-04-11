@@ -31,18 +31,18 @@ public class FollowAddTask {
         saveService.insert(createFollowNotification(event));
     }
 
-    private FollowNotification createFollowNotification(FollowEvent event) {
+    private FollowNotification createFollowNotification(FollowEvent event) { // Notification
         LocalDateTime now = LocalDateTime.now();
 
         return new FollowNotification(
                 NotificationIdGenerator.generate(),
-                event.getTargetUserId(),
+                event.getTargetUserId(), // 이벤트를 받을 사람
                 FOLLOW,
-                event.getCreatedAt(),
+                event.getCreatedAt(), // 이벤트의 생성시간
                 now,
                 now,
                 now.plusDays(90),
-                event.getUserId()
+                event.getUserId() // 이벤트를 발생 시킨 사람, 팔로워를 신청한 사람
         );
     }
 }

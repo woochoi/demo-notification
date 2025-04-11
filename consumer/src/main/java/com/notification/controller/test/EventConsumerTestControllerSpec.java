@@ -70,7 +70,7 @@ public interface EventConsumerTestControllerSpec {
                 "type": "ADD",
                 "postId": 1,
                 "userId": 2,
-                "createdAt": "2024-08-08T18:25:43.511Z"
+                "createdAt": "2025-04-10T18:25:43.511Z"
             }
             """;
 
@@ -79,7 +79,7 @@ public interface EventConsumerTestControllerSpec {
                 "type": "ADD",
                 "userId": 2,
                 "targetUserId": 1,
-                "createdAt": "2024-08-08T18:25:43.511Z"
+                "createdAt": "2025-04-10T18:25:43.511Z"
             }
             """;
 }

@@ -36,3 +36,32 @@ public class FollowEventConsumer {
         };
     }
 }
+
+/*
+
+{
+  "type": "ADD",
+  "userId": 2,          --> followerId 2 가 팔로워 아아디
+  "targetUserId": 1,    --> userId  1 의 알림으로 생성
+  "createdAt": "2025-04-10T18:25:43.511Z"
+}
+
+{
+  "type": "ADD",
+  "userId": 3, 번 유저가
+  "targetUserId": 1, 번 유저를 팔로워 했다!
+  "createdAt": "2025-04-10T18:25:43.511Z"
+}
+-->
+
+_id :"67f7dabc8f1c0a23aaf6d10b"
+followerId : 3
+userId :1
+type :"FOLLOW"
+occurredAt : 2025-04-10T09:25:43.511+00:00
+createdAt : 2025-04-10T14:50:36.476+00:00
+lastUpdatedAt :2025-04-10T14:50:36.476+00:00
+deletedAt : 2025-07-09T14:50:36.476+00:00
+_class :"FollowNotification"
+
+ */
