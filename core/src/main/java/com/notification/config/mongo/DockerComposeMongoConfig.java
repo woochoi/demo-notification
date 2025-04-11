@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 
-//@Profile("local")
+//@Profile("local") // 기본이 local
 //@Configuration
 public class DockerComposeMongoConfig {
     private static final String MONGO_HOST = "localhost";
@@ -19,7 +19,10 @@ public class DockerComposeMongoConfig {
         return new SimpleMongoClientDatabaseFactory(connectionString());
     }
 
+    /**
+     * mongodb://root:12345@localhost:27017/notification?authSource=admin
+     */
     private ConnectionString connectionString() {
-        return new ConnectionString("mongodb://" + MONGO_HOST + ":" + MONGO_PORT + "/" + DATABASE_NAME + "?authSource=admin");
+        return new ConnectionString("mongodb://root:12345@" + MONGO_HOST + ":" + MONGO_PORT + "/" + DATABASE_NAME + "?authSource=admin");
     }
 }
