@@ -9,9 +9,10 @@ import java.time.Instant;
 public class ConvertedFollowNotification extends ConvertedNotification {
     private final String userName;
     private final String userProfileImageUrl;
-    private final boolean isFollowing;
+    private final boolean isFollowing; // 팔로우 여부 : 팔로우 버튼 활성화 유무 판단
 
-    public ConvertedFollowNotification(String id, NotificationType type, Instant occurredAt, Instant lastUpdatedAt,
+    public ConvertedFollowNotification(String id, NotificationType type,
+                                       Instant occurredAt, Instant lastUpdatedAt,
                                        String userName, String userProfileImageUrl, boolean isFollowing) {
         super(id, type, occurredAt, lastUpdatedAt);
         this.userName = userName;

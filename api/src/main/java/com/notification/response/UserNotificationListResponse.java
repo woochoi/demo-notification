@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Schema(description = "유저 알림 목록 응답")
 public class UserNotificationListResponse {
-    @Schema(description = "알림 목록")
+    @Schema(description = "유저 알림 목록")
     private List<UserNotificationResponse> notifications;
 
     @Schema(description = "다음 페이지 존재 여부")
@@ -22,16 +22,20 @@ public class UserNotificationListResponse {
     private Instant pivot;
 
     public static UserNotificationListResponse of(GetUserNotificationsResult result) {
+
+        // ConvertedNotification (result) --> UserNotificationResponse 변환작업이 필요!
         List<UserNotificationResponse> notifications = result.getNotifications().stream()
                 .map(UserNotificationResponse::of)
                 .toList();
 
-        Instant pivot = (result.isHasNext() && !notifications.isEmpty())
+        // pivot 생성
+        Instant pivot =
+                (result.isHasNext() && !notifications.isEmpty())
                 ? notifications.getLast().getOccurredAt() : null;
 
         return new UserNotificationListResponse(
                 notifications,
-                result.isHasNext(),
+                result.isHasNext(), // 동일
                 pivot
         );
     }

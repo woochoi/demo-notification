@@ -20,16 +20,18 @@ public class CommentUserNotificationConverter {
     }
 
     public ConvertedCommentNotification convert(CommentNotification notification) {
-        User user = userClient.getUser(notification.getWriterId());
-        Post post = postClient.getPost(notification.getPostId());
+        User user = userClient.getUser(notification.getWriterId()); // 알림의 댓글 작성자 아이디
+        Post post = postClient.getPost(notification.getPostId());   // 게시물
 
         return new ConvertedCommentNotification(
                 notification.getId(),
                 notification.getType(),
                 notification.getOccurredAt(),
                 notification.getLastUpdatedAt(),
-                user.getName(),
+
+                user.getName(), // 유저명 (작성자) Notification - CommentNotification > writerId; // 댓글 작성자 아이디 (유저 이름)
                 user.getProfileImageUrl(),
+
                 notification.getComment(),
                 post.getImageUrl()
         );

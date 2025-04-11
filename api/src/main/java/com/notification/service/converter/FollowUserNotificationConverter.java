@@ -17,6 +17,8 @@ public class FollowUserNotificationConverter {
 
     public ConvertedFollowNotification convert(FollowNotification notification) {
         User user = userClient.getUser(notification.getFollowerId());
+
+        // User
         boolean isFollowing = userClient.getIsFollowing(notification.getUserId(), notification.getFollowerId());
 
         return new ConvertedFollowNotification(
@@ -26,6 +28,7 @@ public class FollowUserNotificationConverter {
                 notification.getLastUpdatedAt(),
                 user.getName(),
                 user.getProfileImageUrl(),
+
                 isFollowing
         );
     }

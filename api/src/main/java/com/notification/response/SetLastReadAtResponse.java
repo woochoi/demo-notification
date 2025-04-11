@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Getter
 @AllArgsConstructor
@@ -12,5 +12,5 @@ import java.time.LocalDateTime;
 public class SetLastReadAtResponse {
 
     @Schema(description = "기록된 읽은 시간")
-    private LocalDateTime lastReadAt;
+    private Instant lastReadAt;
 }

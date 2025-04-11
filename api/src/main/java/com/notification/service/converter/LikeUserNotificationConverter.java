@@ -20,8 +20,8 @@ public class LikeUserNotificationConverter {
     }
 
     public ConvertedLikeNotification convert(LikeNotification notification) {
-        User user = userClient.getUser(notification.getLikerIds().getLast());
-        Post post = postClient.getPost(notification.getPostId());
+        User user = userClient.getUser(notification.getLikerIds().getLast()); // 좋아요 한 사람들 중에 가장 마지막 한명, List<Long> likerIds
+        Post post = postClient.getPost(notification.getPostId()); // 게시물
 
         return new ConvertedLikeNotification(
                 notification.getId(),
@@ -30,7 +30,7 @@ public class LikeUserNotificationConverter {
                 notification.getLastUpdatedAt(),
                 user.getName(),
                 user.getProfileImageUrl(),
-                notification.getLikerIds().size(),
+                notification.getLikerIds().size(), // ConvertedLikeNotification > private final long userCount; // 좋아요가 N개 일때 (N-1)명
                 post.getImageUrl()
         );
     }

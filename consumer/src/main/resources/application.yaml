@@ -3,6 +3,6 @@ spring:
     name: notification-consumer
   profiles:
     active: local
-    include: event
+    include: event # ???
 server:
   port: 8081

@@ -11,7 +11,7 @@ import com.notification.service.dto.GetUserNotificationsByPivotResult;
 import com.notification.service.dto.GetUserNotificationsResult;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 @Component
@@ -31,18 +31,22 @@ public class GetUserNotificationsService {
         this.followConverter = followConverter;
     }
 
-    public GetUserNotificationsResult getUserNotificationsByPivot(long userId, LocalDateTime pivot) {
+    public GetUserNotificationsResult getUserNotificationsByPivot(long userId, Instant pivot) {
+
+        // 1. 알림 목록 조회 (core > GetUserNotificationsByPivotResult)
         GetUserNotificationsByPivotResult result = listService.getUserNotificationsByPivot(userId, pivot);
 
+        // 2. 알림 목록을 순환하면서 알림(디비에 저장된) --> 사용자 알림으로 변환
+        // (List<Notification> notifications : List 를 분해해서 (stream)... map 로 매핑하고 다시 List 로)
         List<ConvertedNotification> convertedNotifications = result.getNotifications().stream()
                 .map(notification -> switch (notification.getType()) {
                     case COMMENT -> commentConverter.convert((CommentNotification) notification);
                     case LIKE -> likeConverter.convert((LikeNotification) notification);
                     case FOLLOW -> followConverter.convert((FollowNotification) notification);
                 })
-                .toList();
+                .toList(); // 다시 리스트로 변경
 
-        return new GetUserNotificationsResult(
+        return new GetUserNotificationsResult( // hasNext 값도 같이 내려줘야 하기 때문 == GetUserNotificationsByPivotResult
                convertedNotifications,
                result.isHasNext()
         );

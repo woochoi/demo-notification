@@ -6,7 +6,7 @@ import com.notification.domain.NotificationType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Optional;
 
 @Component
@@ -31,7 +31,7 @@ public class NotificationGetService {
         return repository.findByTypeAndUserIdAndFollowerId(type, userId, followerId);
     }
 
-    public LocalDateTime getLatestUpdatedAt(long userId) {
+    public Instant getLatestUpdatedAt(long userId) {
         Optional<Notification> notification = repository.findFirstByUserIdOrderByLastUpdatedAtDesc(userId);
 
         if (notification.isEmpty()) {

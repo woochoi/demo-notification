@@ -2,12 +2,9 @@ package com.notification.controller;
 
 import com.notification.response.SetLastReadAtResponse;
 import com.notification.service.LastReadAtService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @RestController
 @RequestMapping("/v1/user-notifications")
@@ -24,7 +21,15 @@ public class NotificationReadController implements NotificationReadControllerSpe
     public SetLastReadAtResponse setLastReadAt(
             @PathVariable(value = "userId") long userId
     ) {
-        LocalDateTime lastReadAt = service.setLastReadAt(userId);
+        Instant lastReadAt = service.setLastReadAt(userId);
+        return new SetLastReadAtResponse(lastReadAt);
+    }
+
+    @PostMapping("/{userId}/update-last-read")
+    public SetLastReadAtResponse setLastReadAt2(
+            @PathVariable(value = "userId") long userId
+    ) {
+        Instant lastReadAt = service.setLastReadAt(userId);
         return new SetLastReadAtResponse(lastReadAt);
     }
 }

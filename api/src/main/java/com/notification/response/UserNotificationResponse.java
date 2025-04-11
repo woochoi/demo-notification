@@ -12,10 +12,18 @@ import lombok.Getter;
 
 import java.time.Instant;
 
+
+/**
+ * CommentUserNotificationResponse
+ * LikeUserNotificationResponse
+ * FollowUserNotificationResponse
+ */
+
+
 @Getter
 @AllArgsConstructor
 @Schema(description = "유저 알림 응답")
-@JsonSubTypes({
+@JsonSubTypes({ // 추상 클래스이므로 서브 클래스의 타입들도 넣어주면 스웨거 문서에 추가된다
         @JsonSubTypes.Type(value = CommentUserNotificationResponse.class),
         @JsonSubTypes.Type(value = LikeUserNotificationResponse.class),
         @JsonSubTypes.Type(value = FollowUserNotificationResponse.class)
@@ -31,6 +39,9 @@ public abstract class UserNotificationResponse {
     @Schema(description = "알림 이벤트 발생 시간")
     private Instant occurredAt;
 
+    /**
+     * ConvertedNotification (notification) --> UserNotificationResponse 전환 기능
+     */
     public static UserNotificationResponse of(ConvertedNotification notification) {
         switch (notification.getType()) {
             case COMMENT -> {

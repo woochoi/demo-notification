@@ -1,3 +1,29 @@
 spring:
   profiles:
-    active: test
+    active: test #  'test' 프로필을 활성화하겠다는 의미
+
+
+# 활성화할 프로필을 지정, 이를 통해 환경별로 다른 설정을 적용
+
+# 환경별 설정 파일 만들기
+# 다음과 같이 환경별 설정 파일을 생성할 수 있습니다:
+#  application-dev.yml (개발 환경)
+#  application-test.yml (테스트 환경)
+#  application-prod.yml (운영 환경)
+
+#  코드에서 활용하기 > @Profile 어노테이션 사용:
+#  @Component
+#  @Profile("test")  // test 프로필에서만 이 빈이 활성화됨
+#  public class TestDataInitializer { // 테스트 환경에서만 필요한 데이터 초기화 로직 }
+
+# 다중 프로필 활성화:
+# spring:
+#  profiles:
+#    active: test,kafka,mongodb
+
+# 특별한 활용: 테스트 코드 작성
+#  @SpringBootTest
+#  @ActiveProfiles("test")  // 테스트 실행 시 test 프로필 활성화
+#  public class NotificationServiceTest {
+#  // 테스트 코드
+#}

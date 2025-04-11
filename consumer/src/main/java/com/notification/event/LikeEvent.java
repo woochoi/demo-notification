@@ -2,12 +2,12 @@ package com.notification.event;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Data
 public class LikeEvent {
     private LikeEventType type;
     private long postId;
     private long userId;
-    private LocalDateTime createdAt;
+    private Instant createdAt;
 }

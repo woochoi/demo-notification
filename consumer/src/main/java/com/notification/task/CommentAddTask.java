@@ -8,7 +8,8 @@ import com.notification.service.NotificationSaveService;
 import com.notification.utils.NotificationIdGenerator;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Objects;
 
 @Component
@@ -39,7 +40,7 @@ public class CommentAddTask {
     }
 
     private Notification createNotification(Post post, Comment comment) {
-        LocalDateTime now = LocalDateTime.now();
+        Instant now = Instant.now();
 
         return new CommentNotification(
                 NotificationIdGenerator.generate(),
@@ -48,7 +49,7 @@ public class CommentAddTask {
                 comment.getCreatedAt(),
                 now,
                 now,
-                now.plusDays(90),
+                now.plus(Duration.ofDays(90)),
                 post.getId(),
                 comment.getUserId(),
                 comment.getContent(),

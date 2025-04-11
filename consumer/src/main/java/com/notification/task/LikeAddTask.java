@@ -11,7 +11,8 @@ import com.notification.utils.NotificationIdGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,8 +52,8 @@ public class LikeAddTask {
         Optional<Notification> optionalNotification
                 = getService.getNotificationByTypeAndPostId(LIKE, post.getId());
 
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime retention = now.plusDays(90);
+        Instant now = Instant.now();
+        Instant retention = now.plus(Duration.ofDays(90));
 
         if (optionalNotification.isPresent()) {
             return updateNotification((LikeNotification) optionalNotification.get(), event, now, retention);
@@ -61,12 +62,12 @@ public class LikeAddTask {
         }
     }
 
-    private Notification updateNotification(LikeNotification notification, LikeEvent event, LocalDateTime now, LocalDateTime retention) {
+    private Notification updateNotification(LikeNotification notification, LikeEvent event, Instant now, Instant retention) {
         notification.addLiker(event.getUserId(), event.getCreatedAt(), now, retention);
         return notification;
     }
 
-    private Notification createNotification(Post post, LikeEvent event, LocalDateTime now, LocalDateTime retention) {
+    private Notification createNotification(Post post, LikeEvent event, Instant now, Instant retention) {
         return new LikeNotification(
                 NotificationIdGenerator.generate(),
                 post.getUserId(),

@@ -1,8 +1,13 @@
 spring:
   application:
-    name: notification-api
+    name: notification-api # 서비스 이름 설정 (서비스 등록/로깅 등에서 사용됨) (Actuator 등에서 사용됨)
   profiles:
-    active: local
+    active: local # 현재 활성화할 profile 설정 (예: local, dev, prod) (application-local.yaml 파일을 자동 인식함)
+    # @Profile("redis") 이 붙은 @Configuration 파일들이 빈으로 등록됨
+    # 함께 포함할 추가 profile (여기선 redis 관련 설정 포함) (application-redis.yaml도 함께 적용됨)
     include: redis
+
+    # The following 2 profiles are active: "redis", "local"
+
 server:
   port: 8080

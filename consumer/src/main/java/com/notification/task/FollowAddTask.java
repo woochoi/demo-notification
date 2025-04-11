@@ -7,7 +7,8 @@ import com.notification.utils.NotificationIdGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.Duration;
+import java.time.Instant;
 
 
 import static com.notification.domain.NotificationType.FOLLOW;
@@ -32,7 +33,7 @@ public class FollowAddTask {
     }
 
     private FollowNotification createFollowNotification(FollowEvent event) { // Notification
-        LocalDateTime now = LocalDateTime.now();
+        Instant now = Instant.now();
 
         return new FollowNotification(
                 NotificationIdGenerator.generate(),
@@ -41,7 +42,7 @@ public class FollowAddTask {
                 event.getCreatedAt(), // 이벤트의 생성시간
                 now,
                 now,
-                now.plusDays(90),
+                now.plus(Duration.ofDays(90)),
                 event.getUserId() // 이벤트를 발생 시킨 사람, 팔로워를 신청한 사람
         );
     }

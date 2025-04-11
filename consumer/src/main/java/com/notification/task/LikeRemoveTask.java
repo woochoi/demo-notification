@@ -9,7 +9,7 @@ import com.notification.service.NotificationSaveService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Optional;
 
 import static com.notification.domain.NotificationType.LIKE;
@@ -43,7 +43,7 @@ public class LikeRemoveTask {
     }
 
     private void removeLikerAndUpdateNotification(LikeNotification notification, LikeEvent event) {
-        notification.removeLiker(event.getUserId(), LocalDateTime.now());
+        notification.removeLiker(event.getUserId(), Instant.now());
 
         if (notification.getLikerIds().isEmpty()) {
             removeService.deleteById(notification.getId());

@@ -4,7 +4,7 @@ package com.notification.service;
 import com.notification.repository.NotificationReadRepository;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Component
 
@@ -16,14 +16,11 @@ public class LastReadAtService {
         this.repository = repository;
     }
 
-
-    public LocalDateTime setLastReadAt(long userId) {
-        //return repository.setLastReadAt(userId);
-        return LocalDateTime.now();
+    public Instant setLastReadAt(long userId) {
+        return repository.setLastReadAt(userId);
     }
 
-    public LocalDateTime getLastReadAt(long userId) {
-        //return repository.getLastReadAt(userId);
-        return LocalDateTime.now();
+    public Instant getLastReadAt(long userId) {
+        return repository.getLastReadAt(userId);
     }
 }
